@@ -78,3 +78,8 @@ Nếu tất cả kiểm thử thành công, bạn sẽ thấy thông báo PASSED
 
 Nếu kiểm thử thất bại, JUnit sẽ thông báo chi tiết lỗi
    <img width="1512" alt="Screenshot 2025-01-06 at 09 23 24" src="https://github.com/user-attachments/assets/5bfe6af7-8b64-4f55-ac8d-ff1a6b3a5117" />
+
+
+Tài liệu tham khảo:
+
+https://chatgpt.com/share/677b3dfe-be98-8002-8b49-eb178f68f689
