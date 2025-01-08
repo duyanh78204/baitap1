@@ -5,7 +5,15 @@ Bài tập 1:
 Cấu trúc thư mục của bài tập:
 
 
-<img width="363" alt="Screenshot 2025-01-07 at 08 50 46" src="https://github.com/user-attachments/assets/e6891bac-7511-4cfd-a193-73cb0982d743" />
+	├── src
+	│   ├── main
+	│   │   └── java
+	│   │       └── Calculator.java
+	│   └── test
+	│       └── java
+	│           └── CalculatorTest.java
+	├── pom.xml
+	└── README.md
 
 
 
@@ -17,69 +25,77 @@ Trong đó:
    •	CalculatorTest.java là lớp kiểm thử các phương thức trong lớp Calculator.
 
 Ở lớp Calculator:
-Đây là lớp thực hiện các phép toán cơ bản, trong đó:
-1. add(int a, int b): Trả về tổng của hai số a và b.
-   
-2. subtract(int a, int b): Trả về hiệu của hai số a và b.
-   
-3. multiply(int a, int b): Trả về tích của hai số a và b.
-   
-4. divide(int a, int b):
+Lớp Calculator cung cấp các phương thức tính toán cơ bản sau:
 
-Trả về kết quả của phép chia a cho b dưới dạng số thực.
+1. Cộng: Phương thức add(int a, int b) trả về tổng của hai số nguyên a và b.
 
-Nếu b == 0, phương thức sẽ ném ra ngoại lệ IllegalArgumentException với thông báo "Cannot divide by zero".
+2. Trừ: Phương thức subtract(int a, int b) trả về hiệu của hai số nguyên a và b.
+
+3. Nhân: Phương thức multiply(int a, int b) trả về tích của hai số nguyên a và b.
+
+4. Chia: Phương thức divide(int a, int b) trả về kết quả của phép chia a cho b dưới dạng số thực. Nếu b == 0, phương thức sẽ ném ra ngoại lệ IllegalArgumentException với thông báo lỗi “Cannot divide by zero”.
+
+5. Tính mũ: Phương thức power(BigDecimal base, int exponent) tính lũy thừa của một số thực base với số mũ exponent và trả về kết quả dưới dạng BigDecimal.
+	
+6. Tính căn bậc hai: Phương thức sqrt(BigDecimal value) tính căn bậc hai của một số thực value. Nếu giá trị của value là âm, phương thức sẽ ném ra ngoại lệ IllegalArgumentException với thông báo lỗi “Cannot calculate square root of negative number”.
 
 Ở lớp kiểm thử CalculatorTest:
 
-  Mục đích: 
+Lớp CalculatorTest chứa các bài kiểm thử cho các phương thức trong lớp Calculator. Mục đích của lớp kiểm thử là đảm bảo rằng các phương thức trong lớp Calculator hoạt động chính xác và phát hiện lỗi trong các phép toán hoặc xử lý ngoại lệ sai. Các bài kiểm thử được thực hiện như sau:
 
-Đảm bảo rằng các phương thức trong lớp Calculator hoạt động chính xác.
+1. Phương thức kiểm thử testAddition():
+- Kiểm tra tính chính xác của phép cộng:
 
-Phát hiện lỗi trong các phép toán hoặc xử lý ngoại lệ sai.
-  
-Với từng phương thức kiểm thử:
+ + Kiểm tra xem phép cộng của 2 + 3 có trả về kết quả là 5 không.
 
-1. Phương thức testAddition()
+ + Kiểm tra phép cộng với số âm, ví dụ -2 + 1 có trả về kết quả là -1 không.
 
-Kiểm tra tính chính xác của phương thức add():
+2. Phương thức kiểm thử testSubtraction():
 
-assertEquals(5, calculator.add(2, 3)): Kiểm tra xem 2 + 3 có trả về 5 không.
+- Kiểm tra tính chính xác của phép trừ:
+ 
+ + Kiểm tra xem phép trừ 3 - 2 có trả về kết quả là 1 không.
+ 
+ + Kiểm tra phép trừ với số âm, ví dụ -2 - 1 có trả về kết quả là -3 không.
 
-assertEquals(-1, calculator.add(-2, 1)): Kiểm tra phép cộng với số âm (-2 + 1 = -1).
+3. Phương thức kiểm thử testMultiplication():
 
-2. Phương thức testSubtraction()
+- Kiểm tra tính chính xác của phép nhân:
 
-Kiểm tra tính chính xác của phương thức subtract():
+ + Kiểm tra xem phép nhân 2 * 3 có trả về kết quả là 6 không.
 
-assertEquals(1, calculator.subtract(3, 2)): Kiểm tra xem 3 - 2 có trả về 1 không.
+ + Kiểm tra phép nhân với số âm, ví dụ -2 * 2 có trả về kết quả là -4 không.
 
-assertEquals(-3, calculator.subtract(-2, 1)): Kiểm tra phép trừ với số âm (-2 - 1 = -3).
+4. Phương thức kiểm thử testDivision():
 
-3. Phương thức testMultiplication()
+- Kiểm tra tính chính xác của phép chia:
 
-Kiểm tra tính chính xác của phương thức multiply():
+ + Kiểm tra xem phép chia 4 / 2 có trả về kết quả là 2.0 không.
 
-assertEquals(6, calculator.multiply(2, 3)): Kiểm tra xem 2 * 3 có trả về 6 không.
+ + Kiểm tra trường hợp chia cho 0, phương thức phải ném ra ngoại lệ IllegalArgumentException với thông báo “Cannot divide by zero”.
 
-assertEquals(-4, calculator.multiply(-2, 2)): Kiểm tra phép nhân với số âm (-2 * 2 = -4).
+5. Phương thức kiểm thử testPower():
 
-4. Phương thức testDivision()
+- Kiểm tra tính chính xác của phép tính mũ:
 
-Kiểm tra tính chính xác của phương thức divide():
+ + Kiểm tra xem phép tính mũ của 2^3 có trả về kết quả là 8 không.
 
-assertEquals(2.0, calculator.divide(4, 2)): Kiểm tra phép chia 4 / 2 = 2.0.
+6. Phương thức kiểm thử testSqrt():
 
-assertThrows(IllegalArgumentException.class, () -> calculator.divide(1, 0)): Kiểm tra rằng ngoại lệ IllegalArgumentException được ném ra khi chia 1 cho 0.
-  
+- Kiểm tra tính chính xác của phép tính căn bậc hai:
+
+ + Kiểm tra xem căn bậc hai của 4 có trả về kết quả là 2.0 không.
+
+ + Kiểm tra trường hợp đầu vào âm, phương thức phải ném ra ngoại lệ IllegalArgumentException với thông báo “Cannot calculate square root of negative number”.
+
 Kết quả
 
 Nếu tất cả kiểm thử thành công, bạn sẽ thấy thông báo PASSED.
 
 Nếu kiểm thử thất bại, JUnit sẽ thông báo chi tiết lỗi
-   <img width="1512" alt="Screenshot 2025-01-06 at 09 23 24" src="https://github.com/user-attachments/assets/5bfe6af7-8b64-4f55-ac8d-ff1a6b3a5117" />
+
+  ![image](https://github.com/user-attachments/assets/79c89bf6-e325-42ae-b15c-27abc2342a71)
 
 
-Tài liệu tham khảo:
 
-https://chatgpt.com/share/677b3dfe-be98-8002-8b49-eb178f68f689
+
