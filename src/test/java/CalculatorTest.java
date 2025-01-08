@@ -1,42 +1,80 @@
-import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.Test;
+import java.math.BigDecimal;
 
-class CalculatorTest {
+public class CalculatorTest {
 
-    Calculator calculator = new Calculator();
+    Calculator calc = new Calculator(); // Khởi tạo đối tượng Calculator
 
     @Test
-    void testAddition() {
-        assertEquals(5, calculator.add(2, 3), "Addition of 2 and 3 should be 5");
-        assertEquals(0, calculator.add(0, 0), "Addition of 0 and 0 should be 0");
-        assertEquals(-5, calculator.add(-2, -3), "Addition of -2 and -3 should be -5");
-        assertThrows(ArithmeticException.class, () -> calculator.add(Integer.MAX_VALUE, 1), "Adding beyond MAX_VALUE should throw exception");
+    void testAdd() {
+        assertEquals(
+                new BigDecimal("8"),
+                calc.add(new BigDecimal("5"), new BigDecimal("3")),
+                "Addition failed"
+        );
     }
 
     @Test
-    void testSubtraction() {
-        assertEquals(-1, calculator.subtract(2, 3), "Subtraction of 3 from 2 should be -1");
-        assertEquals(0, calculator.subtract(0, 0), "Subtraction of 0 from 0 should be 0");
-        assertThrows(ArithmeticException.class, () -> calculator.subtract(Integer.MIN_VALUE, 1), "Subtracting beyond MIN_VALUE should throw exception");
+    void testSubtract() {
+        assertEquals(
+                new BigDecimal("2"),
+                calc.subtract(new BigDecimal("5"), new BigDecimal("3")),
+                "Subtraction failed"
+        );
     }
 
     @Test
-    void testMultiplication() {
-        assertEquals(6, calculator.multiply(2, 3), "Multiplication of 2 and 3 should be 6");
-        assertThrows(ArithmeticException.class, () -> calculator.multiply(Integer.MAX_VALUE, 2), "Multiplying MAX_VALUE by 2 should throw exception");
+    void testMultiply() {
+        assertEquals(
+                new BigDecimal("20"),
+                calc.multiply(new BigDecimal("4"), new BigDecimal("5")),
+                "Multiplication failed"
+        );
     }
 
     @Test
-    void testDivision() {
-        assertEquals(2, calculator.divide(6, 3), "Division of 6 by 3 should be 2");
-        assertThrows(ArithmeticException.class, () -> calculator.divide(6, 0), "Division by zero should throw exception");
+    void testDivide() {
+        assertEquals(
+                new BigDecimal("4"),
+                calc.divide(new BigDecimal("20"), new BigDecimal("5")),
+                "Division failed"
+        );
     }
 
     @Test
-    void testEdgeCases() {
-        // Trường hợp đặc biệt
-        assertEquals(0, calculator.add(Integer.MIN_VALUE, Integer.MAX_VALUE), "Sum of MIN_VALUE and MAX_VALUE should be 0");
-        assertEquals(Integer.MAX_VALUE, calculator.add(Integer.MAX_VALUE, 0), "Adding MAX_VALUE and 0 should return MAX_VALUE");
-        assertEquals(Integer.MIN_VALUE, calculator.add(Integer.MIN_VALUE, 0), "Adding MIN_VALUE and 0 should return MIN_VALUE");
+    void testDivideByZero() {
+        Exception exception = assertThrows(
+                ArithmeticException.class,
+                () -> calc.divide(new BigDecimal("1"), BigDecimal.ZERO)
+        );
+        assertEquals("Cannot divide by zero", exception.getMessage());
+    }
+
+    @Test
+    void testPower() {
+        assertEquals(
+                new BigDecimal("64"),
+                calc.power(new BigDecimal("4"), 3),
+                "Power calculation failed"
+        );
+    }
+
+    @Test
+    void testSqrt() {
+        assertEquals(
+                new BigDecimal("5"),
+                calc.sqrt(new BigDecimal("25")).setScale(0), // Làm tròn đến 0 chữ số sau dấu thập phân
+                "Square root calculation failed"
+        );
+    }
+
+    @Test
+    void testSqrtNegative() {
+        Exception exception = assertThrows(
+                ArithmeticException.class,
+                () -> calc.sqrt(new BigDecimal("-25"))
+        );
+        assertEquals("Cannot calculate square root of a negative number", exception.getMessage());
     }
 }
